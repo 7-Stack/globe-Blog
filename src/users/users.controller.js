@@ -12,6 +12,18 @@ class UserController {
         return res.status(201).send({ success: true, message: "User created successfully", data: user })
     }
 
+    async me(req, res) {
+        const user = await userService.findOne({
+            _id: req.user?._id
+        })
+
+        return res.status(200).send({
+            success: true,
+            message: "User retrieved on request",
+            data: user
+        })
+    }
+
 }
 
 
