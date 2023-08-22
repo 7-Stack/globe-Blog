@@ -1,4 +1,6 @@
+const User = require("../users/users.model");
 const userService = require("./users.service");
+const { CreateUserSchema } = require("../users/users.schema-validator");
 class UserController {
     async create(req, res) {
         // check if user exists
@@ -8,9 +10,10 @@ class UserController {
         }
 
         // create the user
-        const user = await userService.create(req.body)
+        const value = await CreateUserSchema.validateAsync(req.body);
+        const user = await userService.create(value);
         return res.status(201).send({ success: true, message: "User created successfully", data: user })
-    }
+    };
 
     async me(req, res) {
         const user = await userService.findOne({
@@ -22,7 +25,22 @@ class UserController {
             message: "User retrieved on request",
             data: user
         })
-    }
+    };
+
+    async getUsers (req, res) {
+        console.log("The request body is");
+        const users = await User.find();
+        res.status(200).json(users);
+    };
+
+    async getUser(req, res) {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            res.status(404);
+            throw new Error("User not found");
+        }
+        res.status(201).json(user);
+    };
 
 }
 
