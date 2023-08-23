@@ -10,9 +10,7 @@ class UserController {
             return res.status(409).send({ success: false, message: "User already exists" })
         }
 
-        // create the user
-        const value = await CreateUserSchema.validateAsync(req.body);
-        const user = await userService.create(value);
+        const user = await userService.create(req.body);
         return res.status(201).send({ success: true, message: "User created successfully", data: user })
     };
 
