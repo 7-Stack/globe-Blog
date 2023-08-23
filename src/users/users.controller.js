@@ -10,7 +10,8 @@ class UserController {
         }
 
         // create the user
-        const value = await CreateUserSchema.validateAsync(req.body);
+        // const value = await CreateUserSchema.validateAsync(req.body);
+        UserService.create(req.body)
         const user = await userService.create(value);
         return res.status(201).send({ success: true, message: "User created successfully", data: user })
     };
