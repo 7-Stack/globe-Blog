@@ -11,7 +11,10 @@ class UserService {
         })
     }
 
-    async findOne(filter = { }) {
+    async findOne(filter = { }, select = '') {
+        if (select) {
+        return await User.findOne(filter).select(select)
+        }
         return await User.findOne(filter)
     }
 
