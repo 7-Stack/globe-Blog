@@ -15,6 +15,7 @@ UserRoute.route("/:id")
 // .delete(userController.deleteUser);
 
 UserRoute.post("/", userController.create);
+UserRoute.post("/login", userController.login);
 UserRoute.get("/me", [
     // authenticate
 ], userController.me);
