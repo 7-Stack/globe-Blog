@@ -16,17 +16,23 @@ class UserController {
 
     // login user
     async login(req, res) {
-        const existingUser = await userService.findOne({ email: req.body.email})
+        const existingUser = await userService.findOne({ email: req.body.email }, 'password id email ')
         if (!existingUser) {
             return res.status(400).send({ success: false, message: "Invalid email or password" })
         }
 
+        // try {
+        // console.log(existingUser)
         const isValidPassword = await userService.comparePassword(req.body.password, existingUser.password)
         if (!isValidPassword) {
             return res.status(400).send({ success: false, message: "Invalid email or password" })
         }
 
-        const token = jwt.sign({ _id: existingUser._id, email: existingUser.email }, process.env.JWT_SECRET, { expiresIn: "60m"})
+
+        const token = jwt.sign({ _id: existingUser._id, email: existingUser.email }, process.env.JWT_SECRET, { expiresIn: "60m" })
+        // } catch(error) {
+        //     console.log(error)
+        // }
 
         return res.header("auth-token", token).status(200).send({
             success: true,
@@ -49,7 +55,7 @@ class UserController {
         })
     };
 
-    async getUsers (req, res) {
+    async getUsers(req, res) {
         console.log("The request body is");
         const users = await User.find();
         res.status(200).json(users);
