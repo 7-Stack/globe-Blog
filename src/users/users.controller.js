@@ -1,6 +1,8 @@
 const User = require("../users/users.model");
 const userService = require("./users.service");
 const { CreateUserSchema } = require("../users/users.schema-validator");
+
+const jwt = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 class UserController {
     async create(req, res) {
