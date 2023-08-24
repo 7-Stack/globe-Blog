@@ -8,6 +8,7 @@ module.exports = (app) => {
     app.get(`${basePath}/docs`, (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/28028237/2s9Y5R2mK5")
     })
+    // app.use(`${basePath}`, UserRoute);
 
     app.get(`${basePath}/health-check`, (req, res) => {
         res.send({
