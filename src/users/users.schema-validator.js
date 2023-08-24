@@ -17,3 +17,15 @@ exports.CreateUserSchema = Joi.object({
         .min(5)
         .required()
 })
+
+exports.UpdateUserSchema = Joi.object({
+    firstName: Joi.string()
+    .min(3)
+    .max(20),
+
+    lastName: Joi.string()
+    .min(3)
+    .max(20),
+
+    email: Joi.string().email()
+})
