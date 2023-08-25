@@ -1,9 +1,11 @@
 const app = require("../../app");
+const PostRoute = require("../posts/posts.routes");
 const UserRoute = require("../users/users.routes");
 
 const basePath = "/api/v1";
 
 module.exports = (app) => {
+    app.use(`${basePath}/users/posts`, PostRoute);
     app.use(`${basePath}/users`, UserRoute);
     app.get(`${basePath}/docs`, (req, res) => {
         res.redirect("https://documenter.getpostman.com/view/28028237/2s9Y5R2mK5")
