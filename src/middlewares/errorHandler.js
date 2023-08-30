@@ -1,5 +1,6 @@
 const constants = require("../../constants")
 const errorHandler = (err, req, res, next) => {
+    console.error('', err)
     const env = process.env.NODE_ENV
     const stackTrace = env !== "development" ? undefined : err.stack
     const statusCode = res.statusCode ? res.statusCode : 500;
