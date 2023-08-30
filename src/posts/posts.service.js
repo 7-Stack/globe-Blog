@@ -38,17 +38,11 @@ class PostService {
 
     async deletePost(req, res) {
         const deletePost = await Post.findOneAndRemove(
-            req.params.id,
-            req.body,
-            { remove: true }
-        );
+            { _id: req.params.id });
         // const postIndex = posts.findIndex(post => post.id === postId);
-        if (!deletePost === -1) {
+        if (!deletePost) {
             return res.status(404).json({ message: "Post not found" });
         }
-
-        // posts.splice(deletePost, 1);
-
         res.json({ message: "Post deleted successfully" });
     };
 
