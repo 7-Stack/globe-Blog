@@ -11,12 +11,14 @@ const postSchema = new mongoose.Schema({
 
     content: {
         type: String,
-        require: [true, "What's on your mind?"],
+        require: [true, "Please add a content"],
         minlength: 70,
         maxlength: 1500
     },
-
-
-})
+  },
+    {
+        timestamps: true,
+    }
+);
 
 module.exports = mongoose.model("Post", postSchema);
