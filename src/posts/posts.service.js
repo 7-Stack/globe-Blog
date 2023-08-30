@@ -8,9 +8,12 @@ class PostService {
 
     async getPosts(req, res) {
         console.log("The request body is");
-        const posts = await Post.find();
+        const posts = await Post.find(req.body);
         res.status(200).json(posts);
     };
+    async find(filter = {}) {
+        return await Post.find(filter);
+    }
 
     async getPost(req, res) {
         const post = await Post.findById(req.params.id);
@@ -19,6 +22,10 @@ class PostService {
             throw new Error("There is no such post");
         }
         res.status(201).json(post);
+    };
+
+    async findOne(filter = {}) {
+        return await Post.findOne(filter);
     };
     
 
@@ -40,10 +47,14 @@ class PostService {
             return res.status(404).json({ message: "Post not found" });
         }
 
-        posts.splice(deletePost, 1);
+        // posts.splice(deletePost, 1);
 
         res.json({ message: "Post deleted successfully" });
     };
+
+    async findOneAndRemove(filter = {}) {
+        return await Post.findOneAndRemove(filter);
+    }
 }
 
 
