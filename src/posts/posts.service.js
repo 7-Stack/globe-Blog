@@ -21,7 +21,7 @@ class PostService {
             res.status(404);
             throw new Error("There is no such post");
         }
-        res.status(201).json(post);
+        res.status(200).json(post);
     };
 
     async findOne(filter = {}) {
