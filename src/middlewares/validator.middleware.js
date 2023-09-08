@@ -7,7 +7,8 @@ const validate = (schema) => async(req, res, next) => {
         req.body = value
         next();
     } catch(error) {
-        return res.status(res.statusCode || 400).send({
+        console.log(res.statusCode)
+        return res.status(res?.statusCode > 400 ? res?.statusCode : 400).send({
             success: false,
             message: error.message
         })
