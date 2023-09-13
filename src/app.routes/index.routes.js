@@ -7,6 +7,7 @@ const basePath = "/api/v1";
 
 module.exports = (app) => {
     app.use(`${basePath}/users`, UserRoute);
+    // app.use(`${basePath}/posts/upload`, PostRoute);
     app.use(`${basePath}/posts`, PostRoute);
     app.use(`${basePath}/comments`, CommentRoute);
     app.get(`${basePath}/docs`, (req, res) => {

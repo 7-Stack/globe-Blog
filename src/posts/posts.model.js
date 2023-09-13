@@ -1,5 +1,6 @@
 const { string } = require("joi");
 const mongoose = require("mongoose");
+const { POST_CATEGORY } = require("../utilities/constants.utility");
 
 const postSchema = new mongoose.Schema({
     title: {
@@ -15,6 +16,15 @@ const postSchema = new mongoose.Schema({
         minlength: 70,
         maxlength: 1500
     },
+
+    category: {
+        type: String,
+        enum: POST_CATEGORY,
+        require: [true, "Please indicate post category"],
+    },
+    image: {
+        type: String
+    }
   },
     {
         timestamps: true,
