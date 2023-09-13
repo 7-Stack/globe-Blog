@@ -34,7 +34,15 @@ class PostService {
         const updatedPost = await Post.findOneAndUpdate({_id: id}, post_details, { new: true });
         console.log(updatedPost, "Updated Post")
         return updatedPost;
-    }
+    };
+
+    async updateOne(filter, updates) {
+        const updatedPost = await Post.findOneAndUpdate(filter, updates, {
+            new: true,
+            runValidators: true
+        });
+        return updatedPost
+    };
 
     async deletePost(req, res) {
         const deletePost = await Post.findOneAndRemove(
