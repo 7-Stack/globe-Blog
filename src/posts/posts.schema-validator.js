@@ -10,7 +10,8 @@ exports.CreatePostSchema = Joi.object({
 
     Image: Joi.string(),
 
-    category: Joi.string().valid(...POST_CATEGORY).required()
+    category: Joi.string().valid(...POST_CATEGORY)
+    .default("fashion")
 })
 
 exports.UpdatePostSchema = Joi.object({
